@@ -1,0 +1,7 @@
+fronttail:
+  build: .
+  command: "/log/log.log"
+  volumes:
+    - "./log:/log"
+  ports:
+    - "25252:25252"
