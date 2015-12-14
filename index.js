@@ -65,6 +65,8 @@ if (program.daemonize) {
      * socket.io setup
      */
     var io = socketio.listen(server, {log: false});
+    console.log("Listening on " + program.host + ":" + program.port);
+    console.log("Watching for", files);
 
     if (doAuthorization) {
         io.set('authorization', function (handshakeData, accept) {
@@ -106,6 +108,7 @@ if (program.daemonize) {
     }
 
     var filesSocket = io.of('/' + filesNamespace).on('connection', function (socket) {
+        console.log("Client connected:", socket.id);
         socket.emit('options:lines', program.lines);
 
         program.uiHideTopbar && socket.emit('options:hide-topbar');
